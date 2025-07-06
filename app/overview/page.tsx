@@ -251,7 +251,7 @@ export default function OverviewPage() {
 					</div>
 				</div>
 			) : (
-				<div className="p-6 relative z-10">
+				<div className="p-6 pt-16 relative z-10">
 					{/* Grid view with all images in a flat layout */}
 					<div className="grid grid-cols-3 md:grid-cols-6 gap-10 md:gap-16">
 						{collections.flatMap((collection) =>
