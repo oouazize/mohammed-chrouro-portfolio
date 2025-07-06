@@ -59,8 +59,9 @@ export default function HomePage() {
 							<Image
 								src={images[currentIndex]?.image || "/placeholder.svg"}
 								alt={images[currentIndex]?.title || ""}
-								fill
-								className="object-contain"
+								width={400}
+								height={800}
+								className="object-contain w-[420px]"
 								priority
 							/>
 						</>
@@ -73,7 +74,7 @@ export default function HomePage() {
 			</div>
 
 			{/* Bottom Navigation - Fixed at bottom */}
-			<div className="flex justify-between items-center p-6 py-2 text-sm relative z-50">
+			<div className="flex justify-between items-center p-6 py-2 relative z-50">
 				<button
 					onClick={prevImage}
 					className="hover:text-[#8f8f8f] transition-colors flex items-center space-x-1"

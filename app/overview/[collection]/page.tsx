@@ -91,7 +91,7 @@ export default function CollectionPage() {
 								alt={collection.images[currentIndex]?.title || ""}
 								width={600}
 								height={800}
-								className="object-contain max-h-[80vh]"
+								className="object-contain w-[420px]"
 								priority
 							/>
 						</>
@@ -105,7 +105,7 @@ export default function CollectionPage() {
 
 			{/* Bottom Navigation - Fixed at bottom */}
 			{collection && collection.images.length > 0 && (
-				<div className="flex justify-between items-center p-6 py-2 text-sm relative z-50">
+				<div className="flex justify-between items-center p-6 py-2 relative z-50">
 					<button
 						onClick={prevImage}
 						className="hover:text-[#8f8f8f] transition-colors flex items-center space-x-1"

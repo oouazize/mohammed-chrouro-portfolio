@@ -80,9 +80,9 @@ export default function OverviewPage() {
 								? `${
 										!isHovered.current || hoveredCollection
 											? "text-white"
-											: "text-gray-800"
+											: "text-gray-600"
 								  } font-medium`
-								: "hover:text-gray-800"
+								: "hover:text-gray-600"
 						} transition-colors`}
 					>
 						List
@@ -91,8 +91,8 @@ export default function OverviewPage() {
 						onClick={() => setViewMode("grid")}
 						className={`${
 							viewMode === "grid"
-								? "text-gray-800 font-medium"
-								: "hover:text-gray-800"
+								? "text-gray-600 font-medium"
+								: "hover:text-gray-600"
 						} transition-colors`}
 					>
 						Grid
@@ -141,7 +141,7 @@ export default function OverviewPage() {
 						<div className="flex justify-between items-center w-full max-w-2xl mt-6 text-sm">
 							<button
 								onClick={prevImage}
-								className="hover:text-gray-800 transition-colors flex items-center space-x-1"
+								className="hover:text-gray-600 transition-colors flex items-center space-x-1"
 							>
 								<ChevronLeft size={16} />
 								<span>Previous</span>
@@ -160,7 +160,7 @@ export default function OverviewPage() {
 
 							<button
 								onClick={nextImage}
-								className="hover:text-gray-800 transition-colors flex items-center space-x-1"
+								className="hover:text-gray-600 transition-colors flex items-center space-x-1"
 							>
 								<span>Next</span>
 								<ChevronRight size={16} />
@@ -223,6 +223,7 @@ export default function OverviewPage() {
 										className="cursor-pointer col-start-1 col-end-6 md:col-end-4"
 										onMouseEnter={() => setHoveredCollection(collection.id)}
 										onMouseLeave={() => setHoveredCollection(null)}
+										key={collection.id}
 									>
 										<Link
 											href={`/overview/${collection.id}`}
@@ -238,7 +239,7 @@ export default function OverviewPage() {
 									</div>
 									{((!isHovered.current && slideshowIndex === index) ||
 										hoveredCollection === collection.id) && (
-										<div className="hidden md:block col-start-4">
+										<div className="hidden md:block col-start-4" key={index}>
 											<span className="text-sm text-white transition-colors">
 												{collection.images.length}
 											</span>
@@ -252,30 +253,27 @@ export default function OverviewPage() {
 			) : (
 				<div className="p-6 relative z-10">
 					{/* Grid view with all images in a flat layout */}
-					<div className="grid grid-cols-3 md:grid-cols-6 gap-6 md:gap-10">
+					<div className="grid grid-cols-3 md:grid-cols-6 gap-10 md:gap-16">
 						{collections.flatMap((collection) =>
 							collection.images.map((image, index) => (
-								<div key={`${collection.id}-${image.id}`} className="space-y-2">
-									<div className="text-xs text-gray-500 mb-1">{image.id}.</div>
-									{index !== 0 && (
-										<div className="aspect-[3/4] relative overflow-hidden">
-											<Image
-												src={image.image || "/placeholder.svg"}
-												alt={image.title}
-												fill
-												className={`object-cover hover:scale-105 transition-transform duration-300 ${
-													index === 0 ? "hidden" : ""
-												}`}
-											/>
+								<React.Fragment key={`${collection.id}-${image.id}`}>
+									{index === 0 && (
+										<div
+											key={`${collection.id}_collection`}
+											className="space-y-2"
+										>
+											<div className="text-xs text-gray-500 mb-1">
+												{image.id}.
+											</div>
+											{collection.name && (
+												<div className="text-xs text-gray-500">
+													{collection.name}
+												</div>
+											)}
 										</div>
 									)}
-
-									{!index && collection.name && (
-										<div className="text-xs text-gray-500">
-											{collection.name}
-										</div>
-									)}
-								</div>
+									<CollectionImage collection={collection} image={image} />
+								</React.Fragment>
 							))
 						)}
 					</div>
@@ -284,3 +282,25 @@ export default function OverviewPage() {
 		</div>
 	);
 }
+
+const CollectionImage = ({
+	collection,
+	image,
+}: {
+	collection: any;
+	image: any;
+}) => {
+	return (
+		<div key={`${collection.id}-${image.id}`} className="space-y-2">
+			<div className="text-xs text-gray-500 mb-1">{image.id}.</div>
+			<div className="aspect-[3/4] relative overflow-hidden">
+				<Image
+					src={image.image}
+					alt={image.title}
+					fill
+					className={`object-cover hover:scale-105 transition-transform duration-300`}
+				/>
+			</div>
+		</div>
+	);
+};
