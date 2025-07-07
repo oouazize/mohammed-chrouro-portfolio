@@ -11,6 +11,10 @@ const config: Config = {
     "*.{js,ts,jsx,tsx,mdx}"
   ],
   theme: {
+  	fontFamily: {
+  		sans: ['"Times New Roman"', 'Times', 'serif'],
+  		serif: ['"Times New Roman"', 'Times', 'serif'],
+  	},
   	extend: {
   		colors: {
   			background: 'hsl(var(--background))',
