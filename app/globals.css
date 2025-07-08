@@ -3,11 +3,17 @@
 @tailwind utilities;
 
 html {
-	font-family: "Times New Roman", Times, serif;
+	font-family: var(--font-marion-standart), "Times New Roman", Times, serif;
+}
+
+* {
+	font-size: 15px !important;
+	line-height: 18px !important;
+	color: #8e8e8e;
 }
 
 body {
-	font-family: "Times New Roman", Times, serif;
+	font-family: var(--font-marion-standart), "Times New Roman", Times, serif;
 	@apply antialiased overscroll-none text-xs;
 }
 

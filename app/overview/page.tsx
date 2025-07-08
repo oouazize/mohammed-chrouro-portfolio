@@ -33,11 +33,6 @@ export default function OverviewPage() {
 		}
 	}, [hoveredCollection, collectionPreviews]);
 
-	const openCollection = (collection: Collection) => {
-		setSelectedCollection(collection);
-		setCurrentImageIndex(0);
-	};
-
 	const closeCollection = () => {
 		setSelectedCollection(null);
 		setCurrentImageIndex(0);
@@ -149,11 +144,11 @@ export default function OverviewPage() {
 
 							<div className="text-center">
 								<div className="font-medium">{selectedCollection.name}</div>
-								<div className="text-xs mt-1">
+								<div className="mt-1">
 									{selectedCollection.images[currentImageIndex]?.id}.{" "}
 									{selectedCollection.images[currentImageIndex]?.title}
 								</div>
-								<div className="text-xs text-gray-500 mt-1">
+								<div className="text-gray-500 mt-1">
 									{currentImageIndex + 1} of {selectedCollection.images.length}
 								</div>
 							</div>
@@ -208,7 +203,7 @@ export default function OverviewPage() {
 					<div className="grid grid-cols-5 md:grid-cols-12 relative z-10 p-4 pt-16">
 						<div className="col-end-3 md:col-end-5 col-start-1">
 							<span
-								className={`text-sm ${
+								className={`${
 									!isHovered.current || hoveredCollection ? "text-white" : ""
 								}`}
 							>
@@ -227,7 +222,7 @@ export default function OverviewPage() {
 									>
 										<Link
 											href={`/overview/${collection.id}`}
-											className={`text-sm ${
+											className={`${
 												(!isHovered.current && slideshowIndex === index) ||
 												hoveredCollection === collection.id
 													? "text-white"
@@ -240,7 +235,7 @@ export default function OverviewPage() {
 									{((!isHovered.current && slideshowIndex === index) ||
 										hoveredCollection === collection.id) && (
 										<div className="hidden md:block col-start-4" key={index}>
-											<span className="text-sm text-white transition-colors">
+											<span className="text-white transition-colors">
 												{collection.images.length}
 											</span>
 										</div>
@@ -262,13 +257,9 @@ export default function OverviewPage() {
 											key={`${collection.id}_collection`}
 											className="space-y-2"
 										>
-											<div className="text-xs text-gray-500 mb-1">
-												{image.id}.
-											</div>
+											<div className="text-gray-500 mb-1">{image.id}.</div>
 											{collection.name && (
-												<div className="text-xs text-gray-500">
-													{collection.name}
-												</div>
+												<div className="text-gray-500">{collection.name}</div>
 											)}
 										</div>
 									)}
@@ -292,7 +283,7 @@ const CollectionImage = ({
 }) => {
 	return (
 		<div key={`${collection.id}-${image.id}`} className="space-y-2">
-			<div className="text-xs text-gray-500 mb-1">{image.id}.</div>
+			<div className="text-gray-500 mb-1">{image.id}.</div>
 			<div className="aspect-[3/4] relative overflow-hidden">
 				<Image
 					src={image.image}

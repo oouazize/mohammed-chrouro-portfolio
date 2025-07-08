@@ -291,7 +291,7 @@ export default function AdminDashboard() {
 			<div className="flex justify-between items-center mb-8">
 				<h1 className="text-2xl font-bold">Admin Dashboard</h1>
 				<div className="flex items-center gap-4">
-					<p className="text-sm text-gray-500">{user?.email}</p>
+					<p className="text-gray-500">{user?.email}</p>
 					<Button variant="outline" onClick={() => signOut()}>
 						Sign Out
 					</Button>
@@ -420,7 +420,7 @@ export default function AdminDashboard() {
 								<p className="mb-2">
 									Drag and drop a folder here, or click to select a folder
 								</p>
-								<p className="text-sm text-gray-500 mb-4">
+								<p className="text-gray-500 mb-4">
 									Supported image formats: JPG, PNG, WEBP, GIF
 								</p>
 								<div className="relative">

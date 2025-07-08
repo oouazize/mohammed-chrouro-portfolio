@@ -118,7 +118,7 @@ export default function CollectionPage() {
 							{collection.images[currentIndex]?.id}.{" "}
 							{collection.images[currentIndex]?.title}
 						</span>
-						<div className="text-xs text-gray-500 mt-1">
+						<div className="text-gray-500 mt-1">
 							{currentIndex + 1} of {collection.images.length}
 						</div>
 					</div>

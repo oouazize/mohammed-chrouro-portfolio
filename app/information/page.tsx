@@ -6,14 +6,14 @@ export default function InformationPage() {
 			<div className="space-y-8">
 				{artistInfo.bio.map((paragraph, index) => (
 					<div key={index}>
-						<p className="text-sm leading-relaxed">{paragraph}</p>
+						<p>{paragraph}</p>
 					</div>
 				))}
 			</div>
 
 			<div className="space-y-12">
 				<div>
-					<h3 className="text-sm font-medium mb-4">Exhibitions</h3>
+					<h3 className="font-medium mb-4">Exhibitions</h3>
 					<div className="space-y-1 text-sm">
 						{artistInfo.exhibitions.map((exhibition, index) => (
 							<p key={index}>{exhibition}</p>
