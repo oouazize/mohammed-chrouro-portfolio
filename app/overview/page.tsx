@@ -5,19 +5,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { useImages } from "@/context/image-context";
 import { type Collection } from "@/lib/data";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function OverviewPage() {
 	const { collections, collectionPreviews, isLoading } = useImages();
-	const [viewMode, setViewMode] = useState<"list" | "grid">("list");
+	const [viewMode, setViewMode] = useState<"list" | "grid">(() => {
+		// Initialize viewMode from sessionStorage or default to "list"
+		if (typeof window !== "undefined") {
+			const savedViewMode = sessionStorage.getItem("overviewViewMode");
+			return (savedViewMode as "list" | "grid") || "list";
+		}
+		return "list";
+	});
 	const [hoveredCollection, setHoveredCollection] = useState<string | null>(
 		null
 	);
-	const [selectedCollection, setSelectedCollection] =
-		useState<Collection | null>(null);
-	const [currentImageIndex, setCurrentImageIndex] = useState(0);
 	const isHovered = useRef(false);
 	const [slideshowIndex, setSlideshowIndex] = useState(0);
+
+	// Save viewMode to sessionStorage whenever it changes
+	useEffect(() => {
+		sessionStorage.setItem("overviewViewMode", viewMode);
+	}, [viewMode]);
 
 	// Slideshow effect when no collection is hovered
 	useEffect(() => {
@@ -32,29 +41,6 @@ export default function OverviewPage() {
 			return () => clearInterval(interval);
 		}
 	}, [hoveredCollection, collectionPreviews]);
-
-	const closeCollection = () => {
-		setSelectedCollection(null);
-		setCurrentImageIndex(0);
-	};
-
-	const nextImage = () => {
-		if (selectedCollection) {
-			setCurrentImageIndex(
-				(prev) => (prev + 1) % selectedCollection.images.length
-			);
-		}
-	};
-
-	const prevImage = () => {
-		if (selectedCollection) {
-			setCurrentImageIndex(
-				(prev) =>
-					(prev - 1 + selectedCollection.images.length) %
-					selectedCollection.images.length
-			);
-		}
-	};
 
 	if (isLoading) {
 		return (
@@ -94,76 +80,6 @@ export default function OverviewPage() {
 					</button>
 				</div>
 			</div>
-
-			{/* Collection Modal */}
-			{selectedCollection && (
-				<div className="fixed inset-0 z-40">
-					{/* Close Button */}
-					<button
-						onClick={closeCollection}
-						className="absolute top-6 right-6 z-50 p-2 hover:bg-gray-200 rounded-full transition-colors"
-					>
-						<X size={20} />
-					</button>
-
-					{/* Collection Viewer */}
-					<div className="flex flex-col items-center justify-center h-full px-6">
-						<div className="relative max-w-2xl w-full">
-							{/* Clickable areas for navigation */}
-							<div
-								className="absolute left-0 top-0 w-1/2 h-full z-10 cursor-pointer"
-								onClick={prevImage}
-							/>
-							<div
-								className="absolute right-0 top-0 w-1/2 h-full z-10 cursor-pointer"
-								onClick={nextImage}
-							/>
-
-							<Image
-								src={
-									selectedCollection.images[currentImageIndex]?.image ||
-									"/placeholder.svg"
-								}
-								alt={selectedCollection.images[currentImageIndex]?.title || ""}
-								width={600}
-								height={800}
-								className="w-full h-96 object-cover"
-								priority
-							/>
-						</div>
-
-						{/* Collection Navigation */}
-						<div className="flex justify-between items-center w-full max-w-2xl mt-6 text-sm">
-							<button
-								onClick={prevImage}
-								className="hover:text-gray-600 transition-colors flex items-center space-x-1"
-							>
-								<ChevronLeft size={16} />
-								<span>Previous</span>
-							</button>
-
-							<div className="text-center">
-								<div className="font-medium">{selectedCollection.name}</div>
-								<div className="mt-1">
-									{selectedCollection.images[currentImageIndex]?.id}.{" "}
-									{selectedCollection.images[currentImageIndex]?.title}
-								</div>
-								<div className="text-gray-500 mt-1">
-									{currentImageIndex + 1} of {selectedCollection.images.length}
-								</div>
-							</div>
-
-							<button
-								onClick={nextImage}
-								className="hover:text-gray-600 transition-colors flex items-center space-x-1"
-							>
-								<span>Next</span>
-								<ChevronRight size={16} />
-							</button>
-						</div>
-					</div>
-				</div>
-			)}
 
 			{viewMode === "list" ? (
 				<div className="relative">
@@ -248,14 +164,14 @@ export default function OverviewPage() {
 			) : (
 				<div className="p-6 pt-16 relative z-10">
 					{/* Grid view with all images in a flat layout */}
-					<div className="grid grid-cols-3 md:grid-cols-6 gap-10 md:gap-16">
+					<div className="grid grid-cols-6 md:grid-cols-12 gap-10">
 						{collections.flatMap((collection) =>
 							collection.images.map((image, index) => (
 								<React.Fragment key={`${collection.id}-${image.id}`}>
 									{index === 0 && (
 										<div
 											key={`${collection.id}_collection`}
-											className="space-y-2"
+											className="space-y-2 col-span-2 h-auto"
 										>
 											<div className="text-gray-500 mb-1">{image.id}.</div>
 											{collection.name && (
@@ -281,16 +197,36 @@ const CollectionImage = ({
 	collection: any;
 	image: any;
 }) => {
+	const router = useRouter();
+
+	const handleImageClick = () => {
+		// Find the index of this image in the collection
+		const imageIndex = collection.images.findIndex(
+			(img: any) => img.id === image.id
+		);
+
+		// Store the initial image index in sessionStorage
+		sessionStorage.setItem("initialImageIndex", imageIndex.toString());
+
+		// Navigate to collection page using collection name
+		router.push(`/overview/${collection.id}`);
+	};
+
 	return (
-		<div key={`${collection.id}-${image.id}`} className="space-y-2">
+		<div
+			key={`${collection.id}-${image.id}`}
+			className="space-y-2 col-span-2 h-auto"
+		>
 			<div className="text-gray-500 mb-1">{image.id}.</div>
-			<div className="aspect-[3/4] relative overflow-hidden">
-				<Image
-					src={image.image}
-					alt={image.title}
-					fill
-					className={`object-cover hover:scale-105 transition-transform duration-300`}
-				/>
+			<div className="w-auto h-40 md:h-48 lg:h-56 relative flex justify-start overflow-hidden">
+				<div onClick={handleImageClick} className="cursor-pointer">
+					<Image
+						src={image.image}
+						alt={image.title}
+						fill
+						className={`object-left-top object-contain transition-transform duration-300`}
+					/>
+				</div>
 			</div>
 		</div>
 	);

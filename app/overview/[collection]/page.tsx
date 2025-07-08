@@ -3,11 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import {
-	fetchCollections,
-	type Collection,
-	type Image as ImageType,
-} from "@/lib/data";
+import { fetchCollections, type Collection } from "@/lib/data";
 
 export default function CollectionPage() {
 	const { collection: collectionId } = useParams();
@@ -23,6 +19,17 @@ export default function CollectionPage() {
 
 			if (foundCollection) {
 				setCollection(foundCollection);
+
+				// Check for initial image index from sessionStorage
+				const initialImageIndex = sessionStorage.getItem("initialImageIndex");
+				if (initialImageIndex) {
+					const index = parseInt(initialImageIndex, 10);
+					if (index >= 0 && index < foundCollection.images.length) {
+						setCurrentIndex(index);
+					}
+					// Clear the sessionStorage after using it
+					sessionStorage.removeItem("initialImageIndex");
+				}
 			}
 			setLoading(false);
 		}

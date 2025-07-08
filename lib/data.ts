@@ -38,25 +38,6 @@ export const artistInfo = {
 		"Unis pour le Maroc. Rabat, Morocco",
 		"A drawing for Morocco. Paris, France",
 	],
-	publications: [
-		"i-D",
-		"Vogue Italia",
-		"ODDA magazine",
-		"The Greatest magazine",
-		"The Modern House",
-		"Rivista Studio",
-		"Openhouse",
-		"Pylot, amongst others.",
-	],
-	clients: [
-		"Salvatore Ferragamo",
-		"Fendi",
-		"MSGM",
-		"Trussardi",
-		"Home of Hai",
-		"Modes",
-		"Fav",
-	],
 	contact: {
 		personal: {
 			email: "contact@mohammedchrouro.com",
