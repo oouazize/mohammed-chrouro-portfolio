@@ -11,7 +11,7 @@ export default function Header() {
 	const isAdminPage = pathname?.includes("/admin");
 
 	return (
-		<nav className="flex justify-between md:grid grid-cols-12 p-4 relative">
+		<nav className="flex justify-between md:grid grid-cols-12 p-4 relative z-40">
 			<Link
 				href="/"
 				className="font-medium text-[#8f8f8f] md:col-span-2 md:col-start-1"
