@@ -2,7 +2,7 @@ import Header from "@/components/header";
 import { artistInfo } from "@/lib/data";
 import Link from "next/link";
 
-export default function InformationPage() {
+export default function BiographyPage() {
 	return (
 		<div className="fixed inset-0 w-screen min-h-screen bg-background z-50 md:p-4 overflow-y-auto">
 			{/* Mobile Layout */}

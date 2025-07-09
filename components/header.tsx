@@ -7,7 +7,7 @@ import React from "react";
 export default function Header() {
 	const pathname = usePathname();
 	const isCollectionPage =
-		pathname?.includes("/overview/") && pathname !== "/overview";
+		pathname?.includes("/works/") && pathname !== "/works";
 	const isAdminPage = pathname?.includes("/admin");
 
 	return (
@@ -19,24 +19,24 @@ export default function Header() {
 				{artistInfo.name}
 			</Link>
 			<Link
-				href="/overview"
+				href="/works"
 				className={`font-medium hover:text-[#8f8f8f] transition-colors md:col-span-2 md:col-start-5 ${
 					isCollectionPage || isAdminPage ? "hidden" : ""
 				}`}
 			>
-				Overview
+				Works
 			</Link>
 			<Link
-				href="/information"
+				href="/biography"
 				className={`font-medium hover:text-[#8f8f8f] transition-colors md:col-span-2 md:col-start-9 ${
 					isCollectionPage || isAdminPage ? "hidden" : ""
 				}`}
 			>
-				Information
+				Biography
 			</Link>
 
 			<Link
-				href={isCollectionPage ? "/overview" : "/contact"}
+				href={isCollectionPage ? "/works" : "/contact"}
 				className={`font-medium md:ml-auto hover:text-[#8f8f8f] transition-colors md:col-span-2 md:col-start-11 ${
 					isAdminPage ? "hidden" : ""
 				}`}

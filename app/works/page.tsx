@@ -7,12 +7,12 @@ import { useImages } from "@/context/image-context";
 import { type Collection } from "@/lib/data";
 import { useRouter } from "next/navigation";
 
-export default function OverviewPage() {
+export default function WorksPage() {
 	const { collections, collectionPreviews, isLoading } = useImages();
 	const [viewMode, setViewMode] = useState<"list" | "grid">(() => {
 		// Initialize viewMode from sessionStorage or default to "list"
 		if (typeof window !== "undefined") {
-			const savedViewMode = sessionStorage.getItem("overviewViewMode");
+			const savedViewMode = sessionStorage.getItem("worksViewMode");
 			return (savedViewMode as "list" | "grid") || "list";
 		}
 		return "list";
@@ -25,7 +25,7 @@ export default function OverviewPage() {
 
 	// Save viewMode to sessionStorage whenever it changes
 	useEffect(() => {
-		sessionStorage.setItem("overviewViewMode", viewMode);
+		sessionStorage.setItem("worksViewMode", viewMode);
 	}, [viewMode]);
 
 	// Slideshow effect when no collection is hovered
@@ -137,7 +137,7 @@ export default function OverviewPage() {
 										key={collection.id}
 									>
 										<Link
-											href={`/overview/${collection.id}`}
+											href={`/works/${collection.id}`}
 											className={`${
 												(!isHovered.current && slideshowIndex === index) ||
 												hoveredCollection === collection.id
@@ -209,7 +209,7 @@ const CollectionImage = ({
 		sessionStorage.setItem("initialImageIndex", imageIndex.toString());
 
 		// Navigate to collection page using collection name
-		router.push(`/overview/${collection.id}`);
+		router.push(`/works/${collection.id}`);
 	};
 
 	return (
