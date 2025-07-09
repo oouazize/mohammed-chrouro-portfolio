@@ -53,7 +53,7 @@ export default function WorksPage() {
 	return (
 		<div className="min-h-screen">
 			<div className="grid grid-cols-5 md:grid-cols-12 z-10 relative">
-				<div className="flex flex-col col-end-auto col-start-3 md:col-start-5 items-start space-y-2 mt-1 md:pl-[10px] text-xs">
+				<div className="flex flex-col col-end-auto col-start-3 md:col-start-5 items-start md:pl-[10px] text-xs">
 					<button
 						onClick={() => setViewMode("list")}
 						className={`${
