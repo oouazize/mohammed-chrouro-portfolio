@@ -43,7 +43,9 @@ export default function BiographyPage() {
 				</div>
 
 				<div className="col-start-3 col-end-5 row-start-1">
-					<h2 className="font-medium text-lg">Works</h2>
+					<Link href="/works" className="font-medium text-[#8f8f8f]">
+						Works
+					</Link>
 				</div>
 
 				<div className="col-start-5 col-end-7 row-start-1 space-y-4 text-sm leading-relaxed pb-12">

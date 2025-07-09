@@ -53,7 +53,7 @@ export default function WorksPage() {
 	return (
 		<div className="min-h-screen">
 			<div className="grid grid-cols-5 md:grid-cols-12 z-10 relative">
-				<div className="flex flex-col col-end-auto col-start-3 md:col-start-5 items-start space-y-2 mt-1 md:pl-2 text-xs">
+				<div className="flex flex-col col-end-auto col-start-3 md:col-start-5 items-start space-y-2 mt-1 md:pl-[10px] text-xs">
 					<button
 						onClick={() => setViewMode("list")}
 						className={`${
@@ -127,7 +127,7 @@ export default function WorksPage() {
 							</span>
 						</div>
 
-						<div className="space-y-1 col-start-3 md:col-start-5 col-end-13 grid grid-cols-6">
+						<div className="col-start-3 md:col-start-5 col-end-13 grid grid-cols-6">
 							{collectionPreviews.map((collection, index) => (
 								<React.Fragment key={collection.id}>
 									<div
@@ -165,24 +165,38 @@ export default function WorksPage() {
 				<div className="p-6 pt-16 relative z-10">
 					{/* Grid view with all images in a flat layout */}
 					<div className="grid grid-cols-6 md:grid-cols-12 gap-10">
-						{collections.flatMap((collection) =>
-							collection.images.map((image, index) => (
-								<React.Fragment key={`${collection.id}-${image.id}`}>
-									{index === 0 && (
-										<div
-											key={`${collection.id}_collection`}
-											className="space-y-2 col-span-2 h-auto"
-										>
-											<div className="text-gray-500 mb-1">{image.id}.</div>
-											{collection.name && (
-												<div className="text-gray-500">{collection.name}</div>
+						{(() => {
+							let counter = 0;
+							const formatIndex = (n: number) => n.toString().padStart(3, "0");
+							return collections.map((collection) => (
+								<React.Fragment key={collection.id}>
+									{collection.images.map((image, index) => (
+										<React.Fragment key={`${collection.id}-${image.id}`}>
+											{index === 0 && (
+												<div
+													key={`${collection.id}_collection`}
+													className="space-y-2 col-span-2 h-auto"
+												>
+													<div className="text-gray-500 mb-1">
+														{formatIndex(++counter)}.
+													</div>
+													{collection.name && (
+														<div className="text-gray-500">
+															{collection.name}
+														</div>
+													)}
+												</div>
 											)}
-										</div>
-									)}
-									<CollectionImage collection={collection} image={image} />
+											<CollectionImage
+												collection={collection}
+												image={image}
+												displayIndex={formatIndex(++counter)}
+											/>
+										</React.Fragment>
+									))}
 								</React.Fragment>
-							))
-						)}
+							));
+						})()}
 					</div>
 				</div>
 			)}
@@ -193,9 +207,11 @@ export default function WorksPage() {
 const CollectionImage = ({
 	collection,
 	image,
+	displayIndex,
 }: {
 	collection: any;
 	image: any;
+	displayIndex: string;
 }) => {
 	const router = useRouter();
 
@@ -217,7 +233,7 @@ const CollectionImage = ({
 			key={`${collection.id}-${image.id}`}
 			className="space-y-2 col-span-2 h-auto"
 		>
-			<div className="text-gray-500 mb-1">{image.id}.</div>
+			<div className="text-gray-500 mb-1">{displayIndex}.</div>
 			<div className="w-auto h-40 md:h-48 lg:h-56 relative flex justify-start overflow-hidden">
 				<div onClick={handleImageClick} className="cursor-pointer">
 					<Image
