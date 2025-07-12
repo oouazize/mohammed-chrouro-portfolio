@@ -52,8 +52,8 @@ export default function WorksPage() {
 
 	return (
 		<div className="min-h-screen">
-			<div className="grid grid-cols-5 md:grid-cols-12 z-10 relative">
-				<div className="flex flex-col col-end-auto col-start-3 md:col-start-5 items-start md:pl-[10px] text-xs">
+			<div className="grid grid-cols-12 z-10 relative p-4">
+				<div className="flex flex-col col-end-auto col-start-6 md:col-start-5 items-start text-xs">
 					<button
 						onClick={() => setViewMode("list")}
 						className={`${
@@ -116,8 +116,8 @@ export default function WorksPage() {
 						)}
 
 					{/* Collection List */}
-					<div className="grid grid-cols-5 md:grid-cols-12 relative z-10 p-4 pt-16">
-						<div className="col-end-3 md:col-end-5 col-start-1">
+					<div className="grid grid-cols-12 relative z-10 p-4 pt-16">
+						<div className="col-end-5 col-start-1">
 							<span
 								className={`${
 									!isHovered.current || hoveredCollection ? "text-white" : ""
@@ -127,7 +127,7 @@ export default function WorksPage() {
 							</span>
 						</div>
 
-						<div className="col-start-3 md:col-start-5 col-end-13 grid grid-cols-6">
+						<div className="col-start-6 md:col-start-5 col-end-13 grid grid-cols-6">
 							{collectionPreviews.map((collection, index) => (
 								<React.Fragment key={collection.id}>
 									<div

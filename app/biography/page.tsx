@@ -22,7 +22,7 @@ export default function BiographyPage() {
 				{/* Exhibitions Section */}
 				<div className="w-full grid grid-cols-12 my-12 p-4">
 					<h2 className="font-medium text-lg">Exhibitions</h2>
-					<div className="space-y-1 text-sm col-span-2 col-start-5 -col-end-1">
+					<div className="space-y-1 text-sm col-span-2 col-start-6 -col-end-1">
 						{artistInfo.exhibitions.map((exhibition, index) => (
 							<p key={index}>{exhibition}</p>
 						))}
@@ -32,32 +32,32 @@ export default function BiographyPage() {
 
 			{/* Desktop Layout */}
 			<div
-				className="hidden md:grid grid-cols-8 gap-0 min-h-full"
+				className="hidden md:grid grid-cols-12 gap-0 min-h-full"
 				style={{ gridTemplateRows: "auto auto" }}
 			>
 				{/* First Row - Works Section */}
-				<div className="col-start-1 col-end-3 row-start-1">
+				<div className="col-start-1 col-end-3">
 					<Link href="/" className="font-medium text-[#8f8f8f]">
 						{artistInfo.name}
 					</Link>
 				</div>
 
-				<div className="col-start-3 col-end-5 row-start-1">
+				<div className="col-start-5">
 					<Link href="/works" className="font-medium text-[#8f8f8f]">
 						Works
 					</Link>
 				</div>
 
-				<div className="col-start-5 col-end-7 row-start-1 space-y-4 text-sm leading-relaxed pb-12">
+				<div className="col-start-8 col-end-11 space-y-4 text-sm leading-relaxed pb-12">
 					{artistInfo.bio.map((paragraph, index) => (
 						<p key={index}>{paragraph}</p>
 					))}
 				</div>
 
-				<div className="flex col-start-7 col-end-9 row-start-1">
+				<div className="flex col-start-12 ml-auto">
 					<Link
 						href="/contact"
-						className="font-medium ml-auto hover:text-[#8f8f8f] transition-colors"
+						className="font-medium hover:text-[#8f8f8f] transition-colors"
 					>
 						Contact
 					</Link>
@@ -66,11 +66,11 @@ export default function BiographyPage() {
 				{/* Second Row - Exhibitions Section */}
 				<div className="col-start-1 col-end-3 row-start-2"></div>
 
-				<div className="col-start-3 col-end-5 row-start-2">
+				<div className="col-start-5 row-start-2">
 					<h2 className="font-medium text-lg">Exhibitions</h2>
 				</div>
 
-				<div className="col-start-5 col-end-7 row-start-2 space-y-1 text-sm">
+				<div className="col-start-5 md:col-start-8 col-end-11 row-start-2 space-y-1 text-sm">
 					{artistInfo.exhibitions.map((exhibition, index) => (
 						<p key={index}>{exhibition}</p>
 					))}

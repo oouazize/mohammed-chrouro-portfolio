@@ -11,10 +11,10 @@ export default function Header() {
 	const isAdminPage = pathname?.includes("/admin");
 
 	return (
-		<nav className="grid grid-cols-12 p-4 relative z-40">
+		<nav className="grid grid-cols-16 md:grid-cols-12 p-4 relative z-40">
 			<Link
 				href="/"
-				className="font-medium text-[#8f8f8f] col-span-2 col-start-1"
+				className="font-medium text-[#8f8f8f] col-span-2 col-start-1 col-end-5"
 			>
 				{artistInfo.name}
 			</Link>
@@ -28,7 +28,7 @@ export default function Header() {
 			</Link>
 			<Link
 				href="/biography"
-				className={`font-medium hover:text-[#8f8f8f] transition-colors col-span-2 col-start-8 md:col-start-9 ${
+				className={`font-medium hover:text-[#8f8f8f] transition-colors col-span-2 col-start-9 ${
 					isCollectionPage || isAdminPage ? "hidden" : ""
 				}`}
 			>

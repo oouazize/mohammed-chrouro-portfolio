@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { fetchCollections, type Collection } from "@/lib/data";
+import { getImageIndex } from "@/lib/utils";
 
 export default function CollectionPage() {
 	const { collection: collectionId } = useParams();
@@ -122,7 +123,7 @@ export default function CollectionPage() {
 
 					<div className="text-center">
 						<span>
-							{collection.images[currentIndex]?.id}.{" "}
+							{getImageIndex(currentIndex + 1)}.{" "}
 							{collection.images[currentIndex]?.title}
 						</span>
 					</div>

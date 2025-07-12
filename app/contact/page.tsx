@@ -6,7 +6,7 @@ export default function ContactPage() {
 			<div className="w-full grid grid-cols-12">
 				<div className="col-span-2 col-start-1 -col-end-1 md:col-start-9 md:col-end-11">
 					<p className="-mb-4 md:mb-0">Personal</p>
-					<div className="ml-44 md:ml-0">
+					<div className="ml-[11.5rem] md:ml-0">
 						{artistInfo.contact.personal.email && (
 							<p>E: {artistInfo.contact.personal.email}</p>
 						)}
@@ -19,9 +19,9 @@ export default function ContactPage() {
 					</div>
 				</div>
 
-				<div className="row-span-2 col-span-2 col-start-1 -col-end-1 md:col-start-11 mt-10 md:mt-0">
+				<div className="row-span-2 col-span-2 col-start-1 -col-end-1 md:col-start-11 mt-10 md:mt-0 md:ml-auto">
 					<p className="-mb-4 md:mb-0">Agency</p>
-					<div className="ml-44 md:ml-0">
+					<div className="ml-[11.5rem] md:ml-0">
 						{artistInfo.contact.agency.name && (
 							<p>MA: {artistInfo.contact.agency.name}</p>
 						)}
