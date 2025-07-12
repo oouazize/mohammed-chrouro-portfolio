@@ -3,10 +3,10 @@ import { artistInfo } from "@/lib/data";
 export default function ContactPage() {
 	return (
 		<div className="w-full p-4 flex h-[calc(100dvh-64px)] items-center justify-center">
-			<div className="w-full flex flex-col md:flex-row gap-8 justify-between md:grid grid-cols-12">
-				<div className="flex md:block md:col-span-2 md:col-start-7 md:col-end-10">
-					<p>Personal</p>
-					<div className="ml-24 md:ml-0 flex flex-col">
+			<div className="w-full grid grid-cols-12">
+				<div className="col-span-2 col-start-1 -col-end-1 md:col-start-9 md:col-end-11">
+					<p className="-mb-4 md:mb-0">Personal</p>
+					<div className="ml-44 md:ml-0">
 						{artistInfo.contact.personal.email && (
 							<p>E: {artistInfo.contact.personal.email}</p>
 						)}
@@ -19,9 +19,9 @@ export default function ContactPage() {
 					</div>
 				</div>
 
-				<div className="flex md:block md:col-span-2 md:col-start-10">
-					<p>Agency</p>
-					<div className="ml-24 md:ml-0 flex flex-col">
+				<div className="row-span-2 col-span-2 col-start-1 -col-end-1 md:col-start-11 mt-10 md:mt-0">
+					<p className="-mb-4 md:mb-0">Agency</p>
+					<div className="ml-44 md:ml-0">
 						{artistInfo.contact.agency.name && (
 							<p>MA: {artistInfo.contact.agency.name}</p>
 						)}

@@ -20,9 +20,9 @@ export default function BiographyPage() {
 				</div>
 
 				{/* Exhibitions Section */}
-				<div className="space-y-4 my-12 p-4">
+				<div className="w-full grid grid-cols-12 my-12 p-4">
 					<h2 className="font-medium text-lg">Exhibitions</h2>
-					<div className="space-y-1 text-sm">
+					<div className="space-y-1 text-sm col-span-2 col-start-5 -col-end-1">
 						{artistInfo.exhibitions.map((exhibition, index) => (
 							<p key={index}>{exhibition}</p>
 						))}

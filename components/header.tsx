@@ -11,16 +11,16 @@ export default function Header() {
 	const isAdminPage = pathname?.includes("/admin");
 
 	return (
-		<nav className="flex justify-between md:grid grid-cols-12 p-4 relative z-40">
+		<nav className="grid grid-cols-12 p-4 relative z-40">
 			<Link
 				href="/"
-				className="font-medium text-[#8f8f8f] md:col-span-2 md:col-start-1"
+				className="font-medium text-[#8f8f8f] col-span-2 col-start-1"
 			>
 				{artistInfo.name}
 			</Link>
 			<Link
 				href="/works"
-				className={`font-medium hover:text-[#8f8f8f] transition-colors md:col-span-2 md:col-start-5 ${
+				className={`font-medium hover:text-[#8f8f8f] transition-colors col-span-2 col-start-5 ${
 					isCollectionPage || isAdminPage ? "hidden" : ""
 				}`}
 			>
@@ -28,7 +28,7 @@ export default function Header() {
 			</Link>
 			<Link
 				href="/biography"
-				className={`font-medium hover:text-[#8f8f8f] transition-colors md:col-span-2 md:col-start-9 ${
+				className={`font-medium hover:text-[#8f8f8f] transition-colors col-span-2 col-start-8 md:col-start-9 ${
 					isCollectionPage || isAdminPage ? "hidden" : ""
 				}`}
 			>
@@ -37,7 +37,7 @@ export default function Header() {
 
 			<Link
 				href={isCollectionPage ? "/works" : "/contact"}
-				className={`font-medium md:ml-auto hover:text-[#8f8f8f] transition-colors md:col-span-2 md:col-start-11 ${
+				className={`font-medium ml-auto hover:text-[#8f8f8f] transition-colors col-span-2 col-start-11 ${
 					isAdminPage ? "hidden" : ""
 				}`}
 			>

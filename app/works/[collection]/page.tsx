@@ -98,7 +98,7 @@ export default function CollectionPage() {
 								alt={collection.images[currentIndex]?.title || ""}
 								width={600}
 								height={800}
-								className="object-contain w-[420px]"
+								className="object-contain w-full h-[70dvh]"
 								priority
 							/>
 						</>
@@ -125,9 +125,6 @@ export default function CollectionPage() {
 							{collection.images[currentIndex]?.id}.{" "}
 							{collection.images[currentIndex]?.title}
 						</span>
-						<div className="text-gray-500 mt-1">
-							{currentIndex + 1} of {collection.images.length}
-						</div>
 					</div>
 
 					<button

@@ -164,7 +164,7 @@ export default function WorksPage() {
 			) : (
 				<div className="p-6 pt-16 relative z-10">
 					{/* Grid view with all images in a flat layout */}
-					<div className="grid grid-cols-6 md:grid-cols-12 gap-10">
+					<div className="grid grid-cols-6 md:grid-cols-12 gap-x-[10px] gap-y-10">
 						{(() => {
 							let counter = 0;
 							const formatIndex = (n: number) => n.toString().padStart(3, "0");

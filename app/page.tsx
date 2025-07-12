@@ -61,7 +61,7 @@ export default function HomePage() {
 								alt={images[currentIndex]?.title || ""}
 								width={400}
 								height={800}
-								className="object-contain w-[420px]"
+								className="object-contain w-full h-[70dvh]"
 								priority
 							/>
 						</>

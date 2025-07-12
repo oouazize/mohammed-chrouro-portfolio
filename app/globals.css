@@ -10,6 +10,10 @@ html {
 	font-size: 15px !important;
 	line-height: 18px !important;
 	color: #8e8e8e;
+	@media screen and (max-width: 768px) {
+		font-size: 12px !important;
+		line-height: 15px !important;
+	}
 }
 
 body {
